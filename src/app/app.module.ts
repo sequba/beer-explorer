@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { BeerListComponent } from './beer-list/beer-list.component';
+import { BeerListComponent } from './beers/beer-list/beer-list.component';
 
 @NgModule({
   declarations: [
