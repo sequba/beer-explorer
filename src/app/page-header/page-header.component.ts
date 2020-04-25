@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'bex-page-header',
   template: `
-    <h1 class="my-3">BEERGURU</h1>
+    <h1 class="mt-5">BEERGURU</h1>
   `,
   styles: []
 })
