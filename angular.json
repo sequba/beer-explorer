@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "beer-explorer"
+    }
+  },
+  "defaultProject": "beer-explorer",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }
