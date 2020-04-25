@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { PageHeaderComponent } from './page-header/page-header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,
