@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
