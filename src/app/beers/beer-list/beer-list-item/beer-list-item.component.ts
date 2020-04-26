@@ -7,7 +7,7 @@ import { Beer } from 'src/app/dtos/beer.dto';
         <div class="card py-3">
         <img class="card-img-top" src="{{ data!.image_url }}" alt="Photo of the beer">
           <div class="card-body text-center">
-            <h6 class="card-subtitle">{{ data!.name }}</h6>
+            <h6 class="card-subtitle text-primary">{{ data!.name }}</h6>
             <p class="card-text text-muted">{{ data!.tagline }}</p>
           </div>
         </div>
