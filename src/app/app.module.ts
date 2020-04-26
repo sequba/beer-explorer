@@ -7,17 +7,21 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BeerListComponent } from './beers/beer-list/beer-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BeerListItemComponent } from './beers/beer-list/beer-list-item/beer-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageHeaderComponent,
     PageNotFoundComponent,
-    BeerListComponent
+    BeerListComponent,
+    BeerListItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModalModule
   ],
   providers: [],
