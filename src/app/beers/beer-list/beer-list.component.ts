@@ -25,7 +25,7 @@ export class BeerListComponent implements OnInit {
               private modalService: NgbModal) { }
 
   showDetails(beer: Beer): void {
-    const modalRef = this.modalService.open(BeerDetailsComponent, { centered: true });
+    const modalRef = this.modalService.open(BeerDetailsComponent, { centered: true, size: 'xl', windowClass: 'fade' });
     modalRef.componentInstance.beer = beer;
   }
 

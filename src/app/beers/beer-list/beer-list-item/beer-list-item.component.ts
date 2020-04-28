@@ -15,11 +15,11 @@ import { Beer } from 'src/app/dtos/beer.dto';
   styles: [`
     .card {
       height: 14rem;
+      cursor: pointer;
     }
 
     .card-img-top {
       height: 8rem;
-      object-fit: contain;
     }
 
     .card-text {

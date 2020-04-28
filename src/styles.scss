@@ -6,3 +6,7 @@ $body-bg: #e9ecef;
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+img {
+  object-fit: contain;
+}
