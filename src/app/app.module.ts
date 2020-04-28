@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BeerListComponent } from './beers/beer-list/beer-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BeerListItemComponent } from './beers/beer-list/beer-list-item/beer-list-item.component';
+import { BeerDetailsComponent } from './beers/beer-details/beer-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BeerListItemComponent } from './beers/beer-list/beer-list-item/beer-lis
     PageHeaderComponent,
     PageNotFoundComponent,
     BeerListComponent,
-    BeerListItemComponent
+    BeerListItemComponent,
+    BeerDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { BeerListItemComponent } from './beers/beer-list/beer-list-item/beer-lis
     NgbModalModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BeerDetailsComponent]
 })
 export class AppModule { }
