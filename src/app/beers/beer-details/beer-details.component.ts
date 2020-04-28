@@ -20,11 +20,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
             <p>{{ beer!.description }}</p>
           </div>
         </div>
-        <div class="row">
-          <div *ngFor="let similar of similarBeers" class="col-sm-4">
-            <bex-beer-list-item [beer]="beer" (itemSelected)="showDetails($event)"></bex-beer-list-item>
-          </div>
-        </div>
+        <bex-related-beers [beers]="[beer, beer, beer]" (itemSelected)="showDetails($event)"></bex-related-beers>
       </div>
     </div>
   `,
@@ -36,16 +32,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class BeerDetailsComponent implements OnInit {
   @Input() beer: Beer | undefined;
-  similarBeers = [1, 2, 3];
 
   constructor(private activeModal: NgbActiveModal) { }
 
   closeModal(): void {
-    this.activeModal.close('Cross clicked');
+    this.activeModal.close();
   }
 
   showDetails(beer: Beer): void {
-    // navigate
+    // navigate or close modal with data
   }
 
   ngOnInit(): void {

@@ -10,6 +10,7 @@ import { BeerListComponent } from './beers/beer-list/beer-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BeerListItemComponent } from './beers/beer-list/beer-list-item/beer-list-item.component';
 import { BeerDetailsComponent } from './beers/beer-details/beer-details.component';
+import { RelatedBeersComponent } from './beers/beer-details/related-beers/related-beers.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BeerDetailsComponent } from './beers/beer-details/beer-details.componen
     PageNotFoundComponent,
     BeerListComponent,
     BeerListItemComponent,
-    BeerDetailsComponent
+    BeerDetailsComponent,
+    RelatedBeersComponent
   ],
   imports: [
     BrowserModule,
