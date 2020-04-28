@@ -8,18 +8,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     <div class="modal-header">
       <button class="close p-2" (click)="closeModal()"><span>&times;</span></button>
     </div>
-
     <div class="modal-body pt-0">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-2 col-sm-3 col-lg-2">
-            <img class="img-fluid" src="{{ beer!.image_url }}" alt="Photo of the beer">
-          </div>
-          <div class="col-10 col-sm-9 col-lg-10">
-            <h5 class="modal-title">{{ beer!.name }}</h5>
-            <p>{{ beer!.description }}</p>
-          </div>
-        </div>
+        <bex-beer-description [beer]="beer"></bex-beer-description>
         <bex-related-beers [beers]="[beer, beer, beer]" (itemSelected)="showDetails($event)"></bex-related-beers>
       </div>
     </div>
