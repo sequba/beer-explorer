@@ -25,7 +25,7 @@ export class BeerListComponent implements OnInit {
               private router: Router) { }
 
   goToDetails(beer: Beer): void {
-    this.router.navigate(['details', beer.id]);
+    this.router.navigate(['/details', beer.id]);
   }
 
   ngOnInit(): void {
