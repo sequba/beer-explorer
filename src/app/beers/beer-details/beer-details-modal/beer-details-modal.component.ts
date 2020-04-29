@@ -12,7 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       <div class="container-fluid">
         <bex-beer-description [beer]="beer"></bex-beer-description>
         <p class="font-weight-bold">You might also like:</p>
-        <bex-related-beers [beers]="[beer, beer, beer]" (itemSelected)="showDetails($event)"></bex-related-beers>
+        <bex-related-beers [beers]="[beer, beer, beer]" (itemSelected)="goToDetails($event)"></bex-related-beers>
       </div>
     </div>
   `,
@@ -27,12 +27,12 @@ export class BeerDetailsModalComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal) { }
 
-  closeModal(): void {
-    this.activeModal.close();
+  closeModal(beer?: Beer): void {
+    this.activeModal.close(beer);
   }
 
-  showDetails(beer: Beer): void {
-    // navigate or close modal with data
+  goToDetails(beer: Beer): void {
+    this.closeModal(beer);
   }
 
   ngOnInit(): void {
