@@ -3,7 +3,7 @@ import { Beer } from 'src/app/dtos/beer.dto';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'bex-beer-details',
+  selector: 'bex-beer-details-modal',
   template: `
     <div class="modal-header">
       <button class="close p-2" (click)="closeModal()"><span>&times;</span></button>
@@ -22,7 +22,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     }
   `]
 })
-export class BeerDetailsComponent implements OnInit {
+export class BeerDetailsModalComponent implements OnInit {
   @Input() beer: Beer | undefined;
 
   constructor(private activeModal: NgbActiveModal) { }

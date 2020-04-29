@@ -9,9 +9,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BeerListComponent } from './beers/beer-list/beer-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BeerListItemComponent } from './beers/beer-list/beer-list-item/beer-list-item.component';
-import { BeerDetailsComponent } from './beers/beer-details/beer-details.component';
+import { BeerDetailsModalComponent } from './beers/beer-details/beer-details-modal/beer-details-modal.component';
 import { RelatedBeersComponent } from './beers/beer-details/related-beers/related-beers.component';
 import { BeerDescriptionComponent } from './beers/beer-details/beer-description/beer-description.component';
+import { BeerDetailsModalContainerComponent } from './beers/beer-details/beer-details-modal-container/beer-details-modal-container.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import { BeerDescriptionComponent } from './beers/beer-details/beer-description/
     PageNotFoundComponent,
     BeerListComponent,
     BeerListItemComponent,
-    BeerDetailsComponent,
+    BeerDetailsModalComponent,
     RelatedBeersComponent,
-    BeerDescriptionComponent
+    BeerDescriptionComponent,
+    BeerDetailsModalContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,6 @@ import { BeerDescriptionComponent } from './beers/beer-details/beer-description/
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [BeerDetailsComponent]
+  entryComponents: [BeerDetailsModalComponent]
 })
 export class AppModule { }

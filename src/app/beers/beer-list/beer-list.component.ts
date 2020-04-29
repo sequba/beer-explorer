@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BeersQuery } from '../state/beers.query';
 import { BeersService } from '../state/beers.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BeerDetailsComponent } from '../beer-details/beer-details.component';
+import { BeerDetailsModalComponent } from '../beer-details/beer-details-modal/beer-details-modal.component';
 import { Beer } from 'src/app/dtos/beer.dto';
 
 @Component({
@@ -25,12 +25,13 @@ export class BeerListComponent implements OnInit {
               private modalService: NgbModal) { }
 
   showDetails(beer: Beer): void {
-    const modalRef = this.modalService.open(BeerDetailsComponent, { centered: true, size: 'lg', windowClass: 'fade' });
+    const modalRef = this.modalService.open(BeerDetailsModalComponent, { centered: true, size: 'lg', windowClass: 'fade' });
     modalRef.componentInstance.beer = beer;
   }
 
   ngOnInit(): void {
     this.beersService.loadMore().subscribe();
+    // unsubscribe!!
   }
 
 }
