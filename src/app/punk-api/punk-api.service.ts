@@ -14,9 +14,9 @@ export class PunkApiService {
     return this.http.get<Beer[]>(url);
   }
 
-  fetchBeerById(id: number): Observable<Beer> {
+  fetchBeerById(id: number): Observable<Beer[]> {
     const url = `${this.rootUrl}/${id}`;
-    return this.http.get<Beer>(url);
+    return this.http.get<Beer[]>(url);
   }
 
   constructor(private http: HttpClient) { }
