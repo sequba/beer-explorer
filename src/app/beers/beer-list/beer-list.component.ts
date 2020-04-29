@@ -8,6 +8,7 @@ import { Beer } from 'src/app/dtos/beer.dto';
 @Component({
   selector: 'bex-beer-list',
   template: `
+    <router-outlet></router-outlet>
     <div class="row" *ngIf="(beers$ | async) as beers">
       <div *ngFor="let beer of beers" class="p-sm-1 col-sm-6 col-md-4 col-lg-3">
         <bex-beer-list-item [beer]="beer" (itemSelected)="showDetails($event)"></bex-beer-list-item>
