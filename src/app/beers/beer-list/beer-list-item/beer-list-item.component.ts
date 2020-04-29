@@ -8,7 +8,7 @@ import { Beer } from 'src/app/dtos/beer.dto';
       <img class="card-img-top" src="{{ beer!.image_url }}" alt="Photo of the beer">
       <div class="card-body text-center">
         <h6 class="card-subtitle text-primary">{{ beer!.name }}</h6>
-        <p class="card-text text-muted">{{ beer!.tagline }}</p>
+        <p class="card-text text-muted text-truncate">{{ beer!.tagline }}</p>
       </div>
     </div>
   `,
@@ -20,12 +20,6 @@ import { Beer } from 'src/app/dtos/beer.dto';
 
     .card-img-top {
       height: 8rem;
-    }
-
-    .card-text {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   `]
 })
