@@ -5,13 +5,12 @@ import { Beer } from 'src/app/dtos/beer.dto';
   selector: 'bex-related-beers',
   template: `
     <div class="row" *ngIf="beers">
-      <div *ngFor="let beer of beers" class="col-sm-4">
+      <div *ngFor="let beer of beers" class="col-sm-4 p-sm-1">
         <bex-beer-list-item [beer]="beer" (itemSelected)="relatedBeerSelected($event)"></bex-beer-list-item>
       </div>
     </div>
   `,
-  styles: [
-  ]
+  styles: []
 })
 export class RelatedBeersComponent implements OnInit {
   @Input() beers: Beer[] | undefined;

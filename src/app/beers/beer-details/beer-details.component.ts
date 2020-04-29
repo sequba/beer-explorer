@@ -11,6 +11,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     <div class="modal-body pt-0">
       <div class="container-fluid">
         <bex-beer-description [beer]="beer"></bex-beer-description>
+        <p class="font-weight-bold">You might also like:</p>
         <bex-related-beers [beers]="[beer, beer, beer]" (itemSelected)="showDetails($event)"></bex-related-beers>
       </div>
     </div>
