@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BeersQuery } from '../state/beers.query';
-import { BeersService } from '../state/beers.service';
+import { BeersQuery } from './state/beers.query';
+import { BeersService } from './state/beers.service';
 import { Beer } from 'src/app/dtos/beer.dto';
 import { Router } from '@angular/router';
 
