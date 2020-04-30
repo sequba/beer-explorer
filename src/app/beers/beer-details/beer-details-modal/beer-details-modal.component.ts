@@ -14,7 +14,6 @@ import { share, switchMap, distinctUntilChanged } from 'rxjs/operators';
     <div class="modal-body pt-0">
       <div class="container-fluid">
         <bex-beer-description [beer]="beer$ | async"></bex-beer-description>
-        <p class="font-weight-bold">You might also like:</p>
         <bex-related-beers [beers]="relatedBeers$ | async" (itemSelected)="goToDetails($event)"></bex-related-beers>
       </div>
     </div>

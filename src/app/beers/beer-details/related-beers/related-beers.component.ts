@@ -4,11 +4,17 @@ import { Beer } from 'src/app/dtos/beer.dto';
 @Component({
   selector: 'bex-related-beers',
   template: `
-    <div class="row" *ngIf="beers">
-      <div *ngFor="let beer of beers" class="col-sm-4 p-sm-1">
-        <bex-beer-list-item [beer]="beer" (itemSelected)="relatedBeerSelected($event)"></bex-beer-list-item>
+    <ng-container *ngIf="beers && beers!.length > 0">
+      <p class="font-weight-bold">You might also like:</p>
+      <div class="row">
+        <div *ngFor="let beer of beers" class="col-sm-4 p-sm-1">
+          <bex-beer-list-item [beer]="beer" (itemSelected)="relatedBeerSelected($event)"></bex-beer-list-item>
+        </div>
       </div>
-    </div>
+    </ng-container>
+    <p *ngIf="beers && beers!.length === 0" class="text-center font-weight-bold">
+      This beer is so original that we were unable to find anythong similar in our collection.
+    </p>
   `,
   styles: []
 })
