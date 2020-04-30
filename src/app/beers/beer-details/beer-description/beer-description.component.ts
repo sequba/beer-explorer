@@ -4,7 +4,7 @@ import { Beer } from 'src/app/dtos/beer.dto';
 @Component({
   selector: 'bex-beer-description',
   template: `
-    <div class="row">
+    <div *ngIf="beer" class="row">
       <div class="col-2 col-sm-3 col-lg-2">
         <img class="img-fluid mb-3" src="{{ beer!.image_url }}" alt="Photo of the beer">
       </div>
@@ -18,10 +18,10 @@ import { Beer } from 'src/app/dtos/beer.dto';
           <span class="col-sm-4 col-lg-2"><span class="font-weight-bold">EBC:</span> {{ beer!.ebc }}</span>
         </div>
         <p>{{ beer!.description }}</p>
-        <ng-container *ngIf="beer && beer.food_pairing && beer.food_pairing.length > 0">
+        <ng-container *ngIf="beer!.food_pairing && beer!.food_pairing.length > 0">
           <p class="font-weight-bold">Best served with:</p>
           <ul>
-            <li *ngFor="let food of beer.food_pairing">{{ food }}</li>
+            <li *ngFor="let food of beer!.food_pairing">{{ food }}</li>
           </ul>
         </ng-container>
       </div>

@@ -2,10 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Beer } from 'src/app/dtos/beer.dto';
 import { BeerDetailsModalComponent } from '../beer-details-modal/beer-details-modal.component';
-import { PunkApiService } from 'src/app/punk-api/punk-api.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, NEVER, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'bex-beer-details-modal-container',
@@ -16,8 +15,7 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
   beerIdFromRoute$: Observable<number> = NEVER;
   private destroyed$ = new Subject<boolean>();
 
-  constructor(private apiService: PunkApiService,
-              private modalService: NgbModal,
+  constructor(private modalService: NgbModal,
               private router: Router,
               private route: ActivatedRoute) {}
 
@@ -27,10 +25,9 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
       map(this.parseBeerId));
 
     this.beerIdFromRoute$.pipe(
-      switchMap(id => this.apiService.fetchBeerById(id)),
       takeUntil(this.destroyed$)
-    ).subscribe(beer => {
-      this.openDetailsModal(beer[0]);
+    ).subscribe(beerId => {
+      this.openDetailsModal(beerId);
     }, error => {
       // TODO
       console.log(error);
@@ -41,9 +38,9 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
     this.destroyed$.next(true);
   }
 
-  private openDetailsModal(beer: Beer): void {
+  private openDetailsModal(beerId: number): void {
     const modalRef = this.modalService.open(BeerDetailsModalComponent, { centered: true, size: 'lg', windowClass: 'fade' });
-    modalRef.componentInstance.beer = beer;
+    modalRef.componentInstance.beerId = beerId;
     modalRef.result.then(
       (goToBeer?: Beer) => this.modalClosed(goToBeer),
       (goToBeer?: Beer) => this.modalClosed(goToBeer)
