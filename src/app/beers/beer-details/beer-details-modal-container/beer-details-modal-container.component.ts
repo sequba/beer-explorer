@@ -5,7 +5,7 @@ import { BeerDetailsModalComponent } from '../beer-details-modal/beer-details-mo
 import { PunkApiService } from 'src/app/punk-api/punk-api.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, NEVER, Subject } from 'rxjs';
-import { map, filter, switchMap, takeUntil, catchError } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'bex-beer-details-modal-container',
@@ -24,13 +24,7 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.beerIdFromRoute$ = this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('id')),
-      map(id => {
-        const parsed = parseInt(id as string, 10);
-        if (isNaN(parsed)) {
-          throw new Error(`Cannot parse beer id '${id}'`);
-        }
-        return parsed;
-    }));
+      map(this.parseBeerId));
 
     this.beerIdFromRoute$.pipe(
       switchMap(id => this.apiService.fetchBeerById(id)),
@@ -62,5 +56,13 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
         this.router.navigate(['/details', beer.id]);
       }
     });
+  }
+
+  private parseBeerId(id: string | null): number {
+    const parsed = parseInt(id as string, 10);
+    if (isNaN(parsed)) {
+      throw new Error(`Cannot parse beer id '${id}'`);
+    }
+    return parsed;
   }
 }
