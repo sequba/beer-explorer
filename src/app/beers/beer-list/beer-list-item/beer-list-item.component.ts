@@ -5,10 +5,10 @@ import { Beer } from 'src/app/dtos/beer.dto';
   selector: 'bex-beer-list-item',
   template: `
     <div class="card py-3" (click)="itemClicked()">
-      <img class="card-img-top" src="{{ beer!.image_url }}" alt="Photo of the beer">
+      <img class="card-img-top" src="{{ beer?.image_url }}" alt="Photo of the beer">
       <div class="card-body text-center">
-        <h6 class="card-subtitle text-primary">{{ beer!.name }}</h6>
-        <p class="card-text text-muted text-truncate">{{ beer!.tagline }}</p>
+        <h6 class="card-subtitle text-primary">{{ beer?.name }}</h6>
+        <p class="card-text text-muted text-truncate">{{ beer?.tagline }}</p>
       </div>
     </div>
   `,
