@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Beer } from 'src/app/dtos/beer.dto';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { PunkApiService } from 'src/app/punk-api/punk-api.service';
 import { Observable, NEVER } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BeerDetailsService } from '../beer-details-service/beer-details.service';
 
 @Component({
   selector: 'bex-beer-details-modal',
@@ -30,11 +29,11 @@ export class BeerDetailsModalComponent implements OnInit {
   beer$: Observable<Beer> = NEVER;
   @Input() set beerId(beerId: number | undefined) {
     if (beerId !== undefined) {
-      this.beer$ = this.apiService.fetchBeerById(beerId).pipe(map(beers => beers[0]));
+      this.beer$ = this.detailsService.getBeerById(beerId);
     }
   }
 
-  constructor(private apiService: PunkApiService,
+  constructor(private detailsService: BeerDetailsService,
               private activeModal: NgbActiveModal) { }
 
   closeModal(beer?: Beer): void {
