@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Beer } from 'src/app/dtos/beer.dto';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, NEVER } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { BeerDetailsService } from '../beer-details-service/beer-details.service';
+import { share, switchMap, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'bex-beer-details-modal',
@@ -14,7 +15,7 @@ import { BeerDetailsService } from '../beer-details-service/beer-details.service
       <div class="container-fluid">
         <bex-beer-description [beer]="beer$ | async"></bex-beer-description>
         <p class="font-weight-bold">You might also like:</p>
-        <bex-related-beers [beers]="[]" (itemSelected)="goToDetails($event)"></bex-related-beers>
+        <bex-related-beers [beers]="relatedBeers$ | async" (itemSelected)="goToDetails($event)"></bex-related-beers>
       </div>
     </div>
     <!-- loading -->
@@ -26,15 +27,30 @@ import { BeerDetailsService } from '../beer-details-service/beer-details.service
   `]
 })
 export class BeerDetailsModalComponent implements OnInit {
-  beer$: Observable<Beer> = NEVER;
+  beer$: Observable<Beer>;
+  relatedBeers$: Observable<Beer[]>;
+  private beerId$ = new ReplaySubject<number>(1);
+
   @Input() set beerId(beerId: number | undefined) {
     if (beerId !== undefined) {
-      this.beer$ = this.detailsService.getBeerById(beerId);
+      this.beerId$.next(beerId);
     }
   }
 
-  constructor(private detailsService: BeerDetailsService,
-              private activeModal: NgbActiveModal) { }
+  constructor(
+    private detailsService: BeerDetailsService,
+    private activeModal: NgbActiveModal
+  ) {
+    this.beer$ = this.beerId$.pipe(
+      distinctUntilChanged(),
+      switchMap(id => this.detailsService.getBeerById(id)),
+      share()
+    );
+
+    this.relatedBeers$ = this.beer$.pipe(
+      switchMap(beer => this.detailsService.getRelatedBeers(beer))
+    );
+  }
 
   closeModal(beer?: Beer): void {
     this.activeModal.close(beer);
@@ -44,7 +60,5 @@ export class BeerDetailsModalComponent implements OnInit {
     this.closeModal(beer);
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
