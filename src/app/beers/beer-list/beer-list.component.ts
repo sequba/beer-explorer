@@ -15,12 +15,12 @@ import { Router } from '@angular/router';
       [immediateCheck]="true"
       (scrolled)="loadMoreBeers()">
 
-      <div *ngFor="let beer of []" class="p-sm-1 col-sm-6 col-md-4 col-lg-3">
+      <div *ngFor="let beer of beers" class="p-sm-1 col-sm-6 col-md-4 col-lg-3">
         <bex-beer-list-item [beer]="beer" (itemSelected)="goToDetails($event)"></bex-beer-list-item>
       </div>
 
-      <div *ngIf="isLoading$ | async" class="col-12 my-2 text-center">
-        <div class="spinner-border text-primary"></div>
+      <div *ngIf="isLoading$ | async" class="col-12 my-2">
+        <bex-loading></bex-loading>
       </div>
 
       <div *ngIf="outOfBeers$ | async" class="col-12 my-2 text-center">

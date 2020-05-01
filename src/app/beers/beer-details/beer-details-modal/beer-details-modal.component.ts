@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Beer } from 'src/app/dtos/beer.dto';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
 import { BeerDetailsService } from '../beer-details-service/beer-details.service';
-import { share, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { share, switchMap, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'bex-beer-details-modal',
@@ -13,9 +13,10 @@ import { share, switchMap, distinctUntilChanged } from 'rxjs/operators';
     </div>
     <div class="modal-body pt-0">
       <div class="container-fluid">
+        <bex-loading *ngIf="beerLoading$ | async"></bex-loading>
         <bex-beer-description [beer]="beer$ | async"></bex-beer-description>
+        <bex-loading *ngIf="relatedBeersLoading$ | async"></bex-loading>
         <bex-related-beers [beers]="relatedBeers$ | async" (itemSelected)="goToDetails($event)"></bex-related-beers>
-        <!-- loading -->
       </div>
     </div>
   `,
@@ -28,6 +29,8 @@ import { share, switchMap, distinctUntilChanged } from 'rxjs/operators';
 export class BeerDetailsModalComponent implements OnInit {
   beer$: Observable<Beer>;
   relatedBeers$: Observable<Beer[]>;
+  beerLoading$ = new BehaviorSubject<boolean>(true);
+  relatedBeersLoading$ = new BehaviorSubject<boolean>(false);
   private beerId$ = new ReplaySubject<number>(1);
 
   @Input() set beerId(beerId: number | undefined) {
@@ -43,11 +46,14 @@ export class BeerDetailsModalComponent implements OnInit {
     this.beer$ = this.beerId$.pipe(
       distinctUntilChanged(),
       switchMap(id => this.detailsService.getBeerById(id)),
+      tap(() => this.beerLoading$.next(false)),
       share()
     );
 
     this.relatedBeers$ = this.beer$.pipe(
-      switchMap(beer => this.detailsService.getRelatedBeers(beer))
+      tap(() => this.relatedBeersLoading$.next(true)),
+      switchMap(beer => this.detailsService.getRelatedBeers(beer)),
+      tap(() => this.relatedBeersLoading$.next(false)),
     );
   }
 
