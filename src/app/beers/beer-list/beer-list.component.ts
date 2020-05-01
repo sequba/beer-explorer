@@ -33,4 +33,7 @@ export class BeerListComponent implements OnInit {
     // unsubscribe!!
   }
 
+  onScroll(): void {
+    console.log('scrolled');
+  }
 }

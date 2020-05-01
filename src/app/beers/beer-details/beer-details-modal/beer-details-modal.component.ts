@@ -15,9 +15,9 @@ import { share, switchMap, distinctUntilChanged } from 'rxjs/operators';
       <div class="container-fluid">
         <bex-beer-description [beer]="beer$ | async"></bex-beer-description>
         <bex-related-beers [beers]="relatedBeers$ | async" (itemSelected)="goToDetails($event)"></bex-related-beers>
+        <!-- loading -->
       </div>
     </div>
-    <!-- loading -->
   `,
   styles: [`
     .modal-header {
