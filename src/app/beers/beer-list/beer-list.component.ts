@@ -8,13 +8,20 @@ import { Router } from '@angular/router';
   selector: 'bex-beer-list',
   template: `
     <router-outlet></router-outlet>
-    <div class="row" *ngIf="(beers$ | async) as beers" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMoreBeers()">
+    <div class="row" *ngIf="(beers$ | async) as beers"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      [immediateCheck]="true"
+      (scrolled)="loadMoreBeers()">
 
-      <div *ngFor="let beer of beers" class="p-sm-1 col-sm-6 col-md-4 col-lg-3">
+      <div *ngFor="let beer of []" class="p-sm-1 col-sm-6 col-md-4 col-lg-3">
         <bex-beer-list-item [beer]="beer" (itemSelected)="goToDetails($event)"></bex-beer-list-item>
       </div>
 
-      <!-- <loading> -->
+      <div *ngIf="isLoading$ | async" class="col-12 my-2 text-center">
+        <div class="spinner-border text-primary"></div>
+      </div>
 
       <div *ngIf="outOfBeers$ | async" class="col-12 my-2 text-center">
         <h4>That's it. We have no more beers for you.</h4>
@@ -27,6 +34,7 @@ import { Router } from '@angular/router';
 export class BeerListComponent implements OnInit {
   beers$ = this.beersQuery.allBeers$;
   outOfBeers$ = this.beersQuery.outOfBeers$;
+  isLoading$ = this.beersQuery.selectLoading();
 
   constructor(private beersQuery: BeersQuery,
               private beersService: BeersService,
@@ -37,6 +45,7 @@ export class BeerListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.beersService.loadMore();
     this.loadMoreBeers();
   }
 
