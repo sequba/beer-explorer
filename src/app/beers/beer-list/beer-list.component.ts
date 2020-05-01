@@ -29,11 +29,10 @@ export class BeerListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.beersService.loadMore().subscribe();
-    // unsubscribe!!
+    this.loadMoreBeers();
   }
 
   loadMoreBeers(): void {
-    this.beersService.loadMore().subscribe();
+    this.beersService.loadMore();
   }
 }
