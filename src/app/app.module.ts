@@ -13,6 +13,7 @@ import { BeerDetailsModalComponent } from './beers/beer-details/beer-details-mod
 import { RelatedBeersComponent } from './beers/beer-details/related-beers/related-beers.component';
 import { BeerDescriptionComponent } from './beers/beer-details/beer-description/beer-description.component';
 import { BeerDetailsModalContainerComponent } from './beers/beer-details/beer-details-modal-container/beer-details-modal-container.component';
+import { DefaultPipe } from './utils/default.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BeerDetailsModalContainerComponent } from './beers/beer-details/beer-de
     BeerDetailsModalComponent,
     RelatedBeersComponent,
     BeerDescriptionComponent,
-    BeerDetailsModalContainerComponent
+    BeerDetailsModalContainerComponent,
+    DefaultPipe
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 
       <!-- <loading> -->
 
-      <div *ngIf="outOfBeers$ | async" class="col-12 mt-2 text-center">
+      <div *ngIf="outOfBeers$ | async" class="col-12 my-2 text-center">
         <h4>That's it. We have no more beers for you.</h4>
       </div>
 

@@ -13,9 +13,9 @@ import { Beer } from 'src/app/dtos/beer.dto';
         <h6 class="modal-subtitle text-muted">{{ beer!.tagline }}</h6>
         <div class="border-top border-primary"></div>
         <div class="row">
-          <span class="col-sm-4 col-lg-2"><span class="font-weight-bold">IBU:</span> {{ beer!.ibu ? beer!.ibu : '?' }}</span>
-          <span class="col-sm-4 col-lg-2"><span class="font-weight-bold">ABV:</span> {{ beer!.abv ? beer!.abv : '?' }}</span>
-          <span class="col-sm-4 col-lg-2"><span class="font-weight-bold">EBC:</span> {{ beer!.ebc ? beer!.ebc : '?' }}</span>
+          <span class="col-sm-4 col-lg-2"><span class="font-weight-bold">IBU:</span> {{ beer!.ibu | default:'?' }}</span>
+          <span class="col-sm-4 col-lg-2"><span class="font-weight-bold">ABV:</span> {{ beer!.abv | default:'?' }}</span>
+          <span class="col-sm-4 col-lg-2"><span class="font-weight-bold">EBC:</span> {{ beer!.ebc | default:'?' }}</span>
         </div>
         <p>{{ beer!.description }}</p>
         <ng-container *ngIf="beer!.food_pairing && beer!.food_pairing.length > 0">
