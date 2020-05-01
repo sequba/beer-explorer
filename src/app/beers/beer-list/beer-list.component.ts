@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'bex-beer-list',
   template: `
     <router-outlet></router-outlet>
-    <div class="row" *ngIf="(beers$ | async) as beers">
+    <div class="row" *ngIf="(beers$ | async) as beers" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMoreBeers()">
       <div *ngFor="let beer of beers" class="p-sm-1 col-sm-6 col-md-4 col-lg-3">
         <bex-beer-list-item [beer]="beer" (itemSelected)="goToDetails($event)"></bex-beer-list-item>
       </div>
@@ -33,7 +33,7 @@ export class BeerListComponent implements OnInit {
     // unsubscribe!!
   }
 
-  onScroll(): void {
-    console.log('scrolled');
+  loadMoreBeers(): void {
+    this.beersService.loadMore().subscribe();
   }
 }

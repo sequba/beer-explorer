@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BeerListComponent } from './beers/beer-list/beer-list.component';
@@ -29,7 +30,8 @@ import { BeerDetailsModalContainerComponent } from './beers/beer-details/beer-de
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModalModule
+    NgbModalModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent],

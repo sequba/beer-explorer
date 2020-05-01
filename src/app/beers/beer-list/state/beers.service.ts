@@ -7,14 +7,17 @@ import { tap, mapTo } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class BeersService {
   readonly perPage = 20;
+  lastPageNo = 0;
 
   constructor(private store: BeersStore,
               private api: PunkApiService) {}
 
   loadMore(): Observable<undefined> {
     this.store.setLoading(true);
-    return this.api.fetchBeers(1, this.perPage).pipe(
+    const fetchingPage = this.lastPageNo + 1;
+    return this.api.fetchBeers(fetchingPage, this.perPage).pipe(
       tap(beers => this.store.add(beers)),
+      tap(() => this.lastPageNo = Math.max(fetchingPage, this.lastPageNo)),
       mapTo(undefined),
       tap(() => this.store.setLoading(false))
     );
