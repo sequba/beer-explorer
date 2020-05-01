@@ -13,11 +13,16 @@ export class BeersService {
               private query: BeersQuery,
               private api: PunkApiService) {}
 
-  loadMore(): Promise<undefined> {
+  loadMore(): Promise<void> {
+    if (this.query.getValue().outOfBeers) {
+      return Promise.resolve();
+    }
+
     this.store.setLoading(true);
     const fetchingPage = this.query.getValue().lastLoadedPage + 1;
     return this.api.fetchBeers(fetchingPage, this.perPage).pipe(
       tap(beers => this.store.add(beers)),
+      tap(beers => this.store.update({ outOfBeers: beers.length <= 0 })),
       tap(() => this.updateLastLoadedPage(fetchingPage)),
       mapTo(undefined),
       tap(() => this.store.setLoading(false))
@@ -28,6 +33,6 @@ export class BeersService {
   private updateLastLoadedPage(value: number): void {
     const oldValue = this.query.getValue().lastLoadedPage;
     const newValue = Math.max(oldValue, value);
-    this.store.update({lastLoadedPage: newValue});
+    this.store.update({ lastLoadedPage: newValue });
   }
 }

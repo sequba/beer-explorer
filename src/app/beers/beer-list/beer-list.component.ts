@@ -9,16 +9,24 @@ import { Router } from '@angular/router';
   template: `
     <router-outlet></router-outlet>
     <div class="row" *ngIf="(beers$ | async) as beers" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMoreBeers()">
+
       <div *ngFor="let beer of beers" class="p-sm-1 col-sm-6 col-md-4 col-lg-3">
         <bex-beer-list-item [beer]="beer" (itemSelected)="goToDetails($event)"></bex-beer-list-item>
       </div>
+
+      <!-- <loading> -->
+
+      <div *ngIf="outOfBeers$ | async" class="col-12 mt-2 text-center">
+        <h4>That's it. We have no more beers for you.</h4>
+      </div>
+
     </div>
-    <!-- <loading> -->
   `,
   styles: []
 })
 export class BeerListComponent implements OnInit {
   beers$ = this.beersQuery.allBeers$;
+  outOfBeers$ = this.beersQuery.outOfBeers$;
 
   constructor(private beersQuery: BeersQuery,
               private beersService: BeersService,

@@ -11,4 +11,5 @@ export class BeersQuery extends QueryEntity<BeersState> {
   }
 
   allBeers$: Observable<Beer[]> = this.selectAll();
+  outOfBeers$: Observable<boolean> = this.select(s => s.outOfBeers);
 }
