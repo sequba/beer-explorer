@@ -3,7 +3,6 @@ import { BeersStore } from './beers.store';
 import { PunkApiService } from 'src/app/punk-api/punk-api.service';
 import { tap, mapTo } from 'rxjs/operators';
 import { BeersQuery } from './beers.query';
-import { transaction } from '@datorama/akita';
 
 @Injectable({ providedIn: 'root' })
 export class BeersService {
@@ -29,7 +28,6 @@ export class BeersService {
     ).toPromise();
   }
 
-  @transaction()
   private updateLastLoadedPage(value: number): void {
     const oldValue = this.query.getValue().lastLoadedPage;
     const newValue = Math.max(oldValue, value);

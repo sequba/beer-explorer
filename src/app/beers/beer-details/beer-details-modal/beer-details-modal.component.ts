@@ -8,23 +8,22 @@ import { share, switchMap, distinctUntilChanged, tap } from 'rxjs/operators';
 @Component({
   selector: 'bex-beer-details-modal',
   template: `
-    <div class="modal-header">
+    <div class="modal-header border-0">
       <button class="close p-2" (click)="closeModal()"><span>&times;</span></button>
     </div>
     <div class="modal-body pt-0">
       <div class="container-fluid">
+
         <bex-loading *ngIf="beerLoading$ | async"></bex-loading>
         <bex-beer-description [beer]="beer$ | async"></bex-beer-description>
+
         <bex-loading *ngIf="relatedBeersLoading$ | async"></bex-loading>
         <bex-related-beers [beers]="relatedBeers$ | async" (itemSelected)="goToDetails($event)"></bex-related-beers>
+
       </div>
     </div>
   `,
-  styles: [`
-    .modal-header {
-      border: none;
-    }
-  `]
+  styles: []
 })
 export class BeerDetailsModalComponent implements OnInit {
   beer$: Observable<Beer>;
@@ -45,6 +44,7 @@ export class BeerDetailsModalComponent implements OnInit {
   ) {
     this.beer$ = this.beerId$.pipe(
       distinctUntilChanged(),
+      tap(() => this.beerLoading$.next(true)),
       switchMap(id => this.detailsService.getBeerById(id)),
       tap(() => this.beerLoading$.next(false)),
       share()
@@ -65,5 +65,6 @@ export class BeerDetailsModalComponent implements OnInit {
     this.closeModal(beer);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }
