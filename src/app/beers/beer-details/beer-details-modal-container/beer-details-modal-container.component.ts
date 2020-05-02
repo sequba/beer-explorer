@@ -26,12 +26,10 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
 
     this.beerIdFromRoute$.pipe(
       takeUntil(this.destroyed$)
-    ).subscribe(beerId => {
-      this.openDetailsModal(beerId);
-    }, error => {
-      // TODO
-      console.log(error);
-    });
+    ).subscribe(
+      beerId => this.openDetailsModal(beerId),
+      () => this.handleWrongBeerId()
+    );
   }
 
   ngOnDestroy(): void {
@@ -43,7 +41,7 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.beerId = beerId;
     modalRef.result.then(
       (goToBeer?: Beer) => this.modalClosed(goToBeer),
-      (goToBeer?: Beer) => this.modalClosed(goToBeer)
+      (reason: any) => reason === 'not-found' ? this.handleWrongBeerId() : this.modalClosed()
     );
   }
 
@@ -61,5 +59,9 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
       throw new Error(`Cannot parse beer id '${id}'`);
     }
     return parsed;
+  }
+
+  private handleWrongBeerId(): void {
+    this.router.navigate(['/page-not-found']);
   }
 }

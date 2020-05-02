@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Beer } from 'src/app/dtos/beer.dto';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
+import { Observable, ReplaySubject, BehaviorSubject, NEVER } from 'rxjs';
 import { BeerDetailsService } from '../beer-details-service/beer-details.service';
-import { share, switchMap, distinctUntilChanged, tap } from 'rxjs/operators';
+import { share, switchMap, distinctUntilChanged, tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'bex-beer-details-modal',
@@ -46,6 +46,7 @@ export class BeerDetailsModalComponent implements OnInit {
       distinctUntilChanged(),
       tap(() => this.beerLoading$.next(true)),
       switchMap(id => this.detailsService.getBeerById(id)),
+      catchError(() => this.handleFetchingError()),
       tap(() => this.beerLoading$.next(false)),
       share()
     );
@@ -63,6 +64,11 @@ export class BeerDetailsModalComponent implements OnInit {
 
   goToDetails(beer: Beer): void {
     this.closeModal(beer);
+  }
+
+  private handleFetchingError(): Observable<Beer> {
+    this.activeModal.dismiss('not-found');
+    return NEVER;
   }
 
   ngOnInit(): void {
