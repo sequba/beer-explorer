@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BeersQuery } from './state/beers.query';
 import { BeersService } from './state/beers.service';
 import { of } from 'rxjs';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('BeerListComponent', () => {
   let component: BeerListComponent;
@@ -34,7 +36,8 @@ describe('BeerListComponent', () => {
         { provide: Router, useValue: routerMock },
         { provide: BeersQuery, useValue: beersQueryMock },
         { provide: BeersService, useValue: beersServiceMock }
-      ]
+      ],
+      imports: [InfiniteScrollModule, RouterTestingModule]
     })
     .compileComponents();
   }));
