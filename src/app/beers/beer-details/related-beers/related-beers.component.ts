@@ -30,5 +30,4 @@ export class RelatedBeersComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

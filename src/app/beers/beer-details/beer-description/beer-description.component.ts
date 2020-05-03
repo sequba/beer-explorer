@@ -42,5 +42,4 @@ export class BeerDescriptionComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

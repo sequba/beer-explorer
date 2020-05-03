@@ -54,8 +54,8 @@ export class BeerDetailsModalContainerComponent implements OnInit, OnDestroy {
   }
 
   private parseBeerId(id: string | null): number {
-    const parsed = parseInt(id as string, 10);
-    if (isNaN(parsed)) {
+    const parsed = Number(id);
+    if (id === null || isNaN(parsed)) {
       throw new Error(`Cannot parse beer id '${id}'`);
     }
     return parsed;
