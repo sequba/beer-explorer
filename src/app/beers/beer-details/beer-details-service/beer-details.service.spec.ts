@@ -34,9 +34,9 @@ describe('BeerDetailsService', () => {
       const beer = { id: 2, ibu: 100, abv: 200, ebc: 300 } as Beer;
 
       const expectedFilters: PunkFilters = {
-        ibu_gt: 100 - service.ibuDelta, ibu_lt: 100 + service.ibuDelta,
-        abv_gt: 200 - service.abvDelta, abv_lt: 200 + service.abvDelta,
-        ebc_gt: 300 - service.ebcDelta, ebc_lt: 300 + service.ebcDelta,
+        ibu_gt: 100 - 5, ibu_lt: 100 + 5,
+        abv_gt: 200 - 2, abv_lt: 200 + 2,
+        ebc_gt: 300 - 18, ebc_lt: 300 + 18,
       };
 
       service.getRelatedBeers(beer).subscribe(beers => {
@@ -49,9 +49,9 @@ describe('BeerDetailsService', () => {
       const beer = { id: 2, ibu: 1, abv: 1, ebc: 1 } as Beer;
 
       const expectedFilters: PunkFilters = {
-        ibu_gt: 0, ibu_lt: 1 + service.ibuDelta,
-        abv_gt: 0, abv_lt: 1 + service.abvDelta,
-        ebc_gt: 0, ebc_lt: 1 + service.ebcDelta,
+        ibu_gt: 0, ibu_lt: 1 + 5,
+        abv_gt: 0, abv_lt: 1 + 2,
+        ebc_gt: 0, ebc_lt: 1 + 18,
       };
 
       service.getRelatedBeers(beer).subscribe(beers => {
