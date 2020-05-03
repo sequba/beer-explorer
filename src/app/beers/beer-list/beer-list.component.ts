@@ -45,7 +45,6 @@ export class BeerListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.beersService.loadMore();
     this.loadMoreBeers();
   }
 

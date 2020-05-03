@@ -37,5 +37,4 @@ export class BeerListItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

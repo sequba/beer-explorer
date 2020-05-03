@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
       <div class="spinner-border text-primary"></div>
     </div>
   `,
-  styles: [
-  ]
+  styles: []
 })
 export class LoadingComponent implements OnInit {
 
