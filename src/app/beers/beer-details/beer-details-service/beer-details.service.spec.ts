@@ -40,7 +40,7 @@ describe('BeerDetailsService', () => {
       };
 
       service.getRelatedBeers(beer).subscribe(beers => {
-        expect(apiServiceMock.fetchBeers as jasmine.Spy).toHaveBeenCalledWith(1, 4, expectedFilters);
+        expect(apiServiceMock.fetchBeers).toHaveBeenCalledWith(1, 4, expectedFilters);
         done();
       });
     });
@@ -55,7 +55,7 @@ describe('BeerDetailsService', () => {
       };
 
       service.getRelatedBeers(beer).subscribe(beers => {
-        expect(apiServiceMock.fetchBeers as jasmine.Spy).toHaveBeenCalledWith(1, 4, expectedFilters);
+        expect(apiServiceMock.fetchBeers).toHaveBeenCalledWith(1, 4, expectedFilters);
         done();
       });
     });
